@@ -65,9 +65,8 @@
                   // plus généralement : https://www.php.net/manual/fr/mysqli.query.php
                  */
 
-                // Etape 1: Ouvrir une connexion avec la base de donnée.
-                $mysqli = new mysqli("localhost", "root", "", "socialnetwork");
-                //verification
+                include('connect.php');
+
                 if ($mysqli->connect_errno)
                 {
                     echo "<article>";
@@ -76,6 +75,8 @@
                     echo "</article>";
                     exit();
                 }
+
+
 
                 // Etape 2: Poser une question à la base de donnée et récupérer ses informations
                 // cette requete vous est donnée, elle est complexe mais correcte, 
