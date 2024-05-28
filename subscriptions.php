@@ -44,6 +44,9 @@
                 $userId = intval($_GET['user_id']);
                 // Etape 2: se connecter à la base de donnée
                 include('connect.php');
+
+                if ($_SESSION ['connected_id']=$user['id']) {
+
                 // Etape 3: récupérer le nom de l'utilisateur
                 $laQuestionEnSql = "
                     SELECT users.* 
@@ -62,6 +65,10 @@
                     <p>id:654</p>                    
                 </article>
             </main>
+            <?php
+                }
+                echo ("Vous n'êtes pas connecté·e")
+                ?>
         </div>
     </body>
 </html>

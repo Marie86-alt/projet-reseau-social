@@ -53,6 +53,13 @@
                  */
                 include('connect.php');
 
+                ?>
+
+                 <?php
+
+            if ($_SESSION ['connected_id']=$user['id']) {
+            ?>
+            <?php
                 /**
                  * Etape 3: récupérer le nom de l'utilisateur
                  */
@@ -98,6 +105,10 @@
 
                 </article>
             </main>
+            <?php
+            }
+            echo ("Vous n'êtes pas connecté·e")
+            ?>
         </div>
     </body>
 </html>

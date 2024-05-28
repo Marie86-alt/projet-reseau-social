@@ -43,7 +43,11 @@
              */
             include('connect.php');
             ?>
+            <?php
 
+            if ($_SESSION ['connected_id']=$user['id']) {
+            ?>
+            
             <aside>
                 <?php
                 /**
@@ -121,6 +125,11 @@
 
 
             </main>
+            <?php
+            }
+            echo ("Vous n'êtes pas connecté·e")
+            ?>
         </div>
     </body>
 </html>
+            
