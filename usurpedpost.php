@@ -43,7 +43,7 @@ session_start();
                     /**
                      * BD
                      */
-                    $mysqli = new mysqli("localhost", "root", "", "socialnetwork_tests");
+                      include('connect.php');//$mysqli = new mysqli("localhost", "root", "", "socialnetwork_tests");
                     /**
                      * Récupération de la liste des auteurs
                      */
@@ -67,10 +67,10 @@ session_start();
                         // on ne fait ce qui suit que si un formulaire a été soumis.
                         // Etape 2: récupérer ce qu'il y a dans le formulaire @todo: c'est là que votre travaille se situe
                         // observez le résultat de cette ligne de débug (vous l'effacerez ensuite)
-                        echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                       // echo "<pre>" . print_r($_POST, 1) . "</pre>";
                         // et complétez le code ci dessous en remplaçant les ???
-                        $authorId = $_POST['???'];
-                        $postContent = $_POST['???'];
+                        $authorId = $_POST['auteur'];
+                        $postContent = $_POST['message'];
 
 
                         //Etape 3 : Petite sécurité
@@ -100,7 +100,7 @@ session_start();
                     }
                     ?>                     
                     <form action="usurpedpost.php" method="post">
-                        <input type='hidden' name='???' value='achanger'>
+                        <input type='hidden' name='user-id' value='<?php echo $_SESSION['connected_id']; ?>'>
                         <dl>
                             <dt><label for='auteur'>Auteur</label></dt>
                             <dd><select name='auteur'>
@@ -112,7 +112,7 @@ session_start();
                             <dt><label for='message'>Message</label></dt>
                             <dd><textarea name='message'></textarea></dd>
                         </dl>
-                        <input type='submit'>
+                        <input type='submit' value='poster'>
                     </form>               
                 </article>
             </main>
