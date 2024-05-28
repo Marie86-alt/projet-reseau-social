@@ -78,10 +78,12 @@ session_start();
                             
                         } else
                         {
-                            echo "Votre connexion est un succès : " . $user['alias'] . ".";
                             // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                             // documentation: https://www.php.net/manual/fr/session.examples.basic.php
                             $_SESSION['connected_id']=$user['id'];
+                            $_SESSION['alias']=$user['alias'];
+
+                            echo "Votre connexion est un succès : " . $_SESSION['alias'] . ".";
                         }
                     }
                     ?>                     
