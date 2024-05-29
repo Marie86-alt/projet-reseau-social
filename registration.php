@@ -54,7 +54,9 @@
 
 
                         //Etape 3 : Ouvrir une connexion avec la base de donnée.
-                        $mysqli = new mysqli("localhost", "root", "", "socialnetwork");
+                        include('connect.php');
+                        include('connectbtn.php');
+                        //$mysqli = new mysqli("localhost", "root", "", "socialnetwork");
                         //Etape 4 : Petite sécurité
                         // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
                         $new_email = $mysqli->real_escape_string($new_email);

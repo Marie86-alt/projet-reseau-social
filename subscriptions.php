@@ -32,7 +32,7 @@
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez la liste des personnes dont
                         l'utilisatrice
-                        n° <?php echo intval($_GET['user_id']) ?>
+                        n° <?php echo intval($_GET['user_id'])  ?>
                         suit les messages
                     </p>
 
@@ -44,6 +44,7 @@
                 $userId = intval($_GET['user_id']);
                 // Etape 2: se connecter à la base de donnée
                 include('connect.php');
+                include('connectbtn.php');
 
 
                 // Etape 3: récupérer le nom de l'utilisateur

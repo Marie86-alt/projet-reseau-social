@@ -41,6 +41,7 @@
              * Etape 2: se connecter à la base de donnée
              */
             include('connect.php');
+            include('connectbtn.php');
             ?>
 
             <aside>

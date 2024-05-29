@@ -43,7 +43,9 @@ session_start();
                     /**
                      * BD
                      */
-                      include('connect.php');//$mysqli = new mysqli("localhost", "root", "", "socialnetwork_tests");
+                      include('connect.php');
+                      include('connectbtn.php');
+                      //$mysqli = new mysqli("localhost", "root", "", "socialnetwork_tests");
                     /**
                      * Récupération de la liste des auteurs
                      */

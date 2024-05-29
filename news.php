@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
+    <?php
+        // Démarrer la session
+        session_start();
+        ?>
         <header>
             <a href='admin.php'><img src="resoc.jpg" alt="Logo de notre réseau social"/></a>
             <nav id="menu">
@@ -16,12 +20,24 @@
                 <a href="tags.php?tag_id=1">Mots-clés</a>
             </nav>
             <nav id="user">
+                <?php
+            if (isset($_SESSION['connected_id'])) {
+                    // Si l'utilisateur est connecté
+                    ?>
                 <a href="#">▾ Profil</a>
                 <ul>
                     <li><a href="settings.php?user_id=5">Paramètres</a></li>
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
                     <li><a href="subscriptions.php?user_id=5">Mes abonnements</a></li>
                 </ul>
+                <?php
+                } else {
+                    // Si l'utilisateur n'est pas connecté
+                    ?>
+                    <a href="login.php">Profil</a>
+                    <?php
+                }
+                ?>
             </nav>
         </header>
         <div id="wrapper">
@@ -45,6 +61,7 @@
                  */
 
                 include('connect.php');
+                include('connectbtn.php');
 
                 if ($mysqli->connect_errno)
                 {

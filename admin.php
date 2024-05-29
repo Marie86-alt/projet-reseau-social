@@ -31,7 +31,8 @@
          * Etape 1: Ouvrir une connexion avec la base de donnée.
          */
         // on va en avoir besoin pour la suite
-        include('connect.php');        
+        include('connect.php');   
+        include('connectbtn.php');     
         ?>
         <div id="wrapper" class='admin'>
             <aside>
