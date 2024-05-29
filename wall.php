@@ -61,8 +61,19 @@
                         (n° <?php echo $userId ?>)
                     </p>
                 </section>
+                <?php if ($connectedUserId && $connectedUserId != $userId): ?>
+                <section>
+                    <h3>S'abonner</h3>
+                    <form action="registrer.php" method="post">
+                        <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
+                        <button type="submit">S'abonner</button>
+                    </form>
+                </section>
+                <?php endif; ?>
             </aside>
             <main>
+            <?php
+
                 <?php
                 /**
                  * Etape 3: récupérer tous les messages de l'utilisatrice
