@@ -24,7 +24,9 @@
             if (isset($_SESSION['connected_id'])) {
                     // Si l'utilisateur est connecté
                     ?>
-                <a href="#">▾ Profil</a>
+                  <?php
+            include('connectbtn.php');
+            ?>
                 <ul>
                     <li><a href="settings.php?user_id=5">Paramètres</a></li>
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
@@ -61,7 +63,7 @@
                  */
 
                 include('connect.php');
-                include('connectbtn.php');
+                
 
                 if ($mysqli->connect_errno)
                 {

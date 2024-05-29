@@ -19,7 +19,9 @@ session_start();
                 <a href="tags.php?tag_id=1">Mots-clés</a>
             </nav>
             <nav id="user">
-                <a href="#">Profil</a>
+            <?php
+            include('connectbtn.php');
+            ?>
                 <ul>
                     <li><a href="settings.php?user_id=5">Paramètres</a></li>
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
@@ -44,7 +46,7 @@ session_start();
                      * BD
                      */
                       include('connect.php');
-                      include('connectbtn.php');
+                     
                       //$mysqli = new mysqli("localhost", "root", "", "socialnetwork_tests");
                     /**
                      * Récupération de la liste des auteurs
