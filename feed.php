@@ -16,7 +16,9 @@
                 <a href="tags.php?tag_id=1">Mots-clés</a>
             </nav>
             <nav id="user">
-                <a href="#">Profil</a>
+            <?php
+            include('connectbtn.php');
+            ?>
                 <ul>
                     <li><a href="settings.php?user_id=5">Paramètres</a></li>
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
@@ -42,7 +44,7 @@
              * Etape 2: se connecter à la base de donnée
              */
             include('connect.php');
-            include('connectbtn.php');
+            
             ?>
             
             
