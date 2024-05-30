@@ -87,7 +87,7 @@
                     }
                     ?>                     
                     <form action="registration.php" method="post">
-                        <input type='hidden'name='???' value='achanger'>
+                        <input type='hidden'name='user_id' value='<?php echo $userId; ?>'>
                         <dl>
                             <dt><label for='pseudo'>Pseudo</label></dt>
                             <dd><input type='text'name='pseudo'></dd>
@@ -96,7 +96,7 @@
                             <dt><label for='motpasse'>Mot de passe</label></dt>
                             <dd><input type='password'name='motpasse'></dd>
                         </dl>
-                        <input type='submit'>
+                        <input type='submit' value="s'inscrire">
                     </form>
                 </article>
             </main>
