@@ -1,6 +1,28 @@
 <?php
 // Démarrer la session
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe'])) {
+    // Se connecter à la base de données
+    include('connect.php');
+
+    // Récupérer l'id de l'utilisateur connecté
+    $connectedId = $_SESSION['connected_id'];
+    // Récupérer l'id de l'utilisateur à suivre
+    $followedUserId = intval($_POST['followed_user_id']);
+
+    // Ajouter une nouvelle ligne dans la table followers
+    $insertQuery = "INSERT INTO followers (following_user_id, followed_user_id) VALUES (?, ?)";
+    $stmt = $mysqli->prepare($insertQuery);
+    $stmt->bind_param('ii', $connectedId, $followedUserId);
+
+    if ($stmt->execute()) {
+        echo "Vous suivez maintenant cet utilisateur.";
+    } else {
+        echo "Erreur : " . $stmt->error;
+    }
+    $stmt->close();
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -20,9 +42,9 @@ session_start();
                 <a href="tags.php?tag_id=1">Mots-clés</a>
             </nav>
             <nav id="user">
-             <?php
+            <?php
             include('connectbtn.php');
-            ?>
+            ?>  
                 <ul>
                     <li><a href="settings.php?user_id=5">Paramètres</a></li>
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
@@ -57,18 +79,17 @@ session_start();
                     </p>
                 </section>
                 <?php
-            // Ajouter le formulaire d'abonnement si l'utilisateur n'est pas sur son propre mur
-            
-                ?>
-                <form action="subscriptions.php" method="post">
-                    <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
-                    <button type="submit">S'abonner</button>
-                </form>
-                <?php
-             if (isset($_SESSION['connected_id']) && $_SESSION['connected_id'] != $userId) {
-            }
-            ?>
-           
+// Ajouter le formulaire d'abonnement si l'utilisateur n'est pas sur son propre mur
+if (isset($_SESSION['connected_id']) && $_SESSION['connected_id'] != $userId) {
+?>
+    <form action="subscribe.php" method="post">
+        <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
+        <button type="submit">S'abonner</button>
+    </form>
+<?php
+}
+?>
+
             </aside>
             <main>
                 <?php

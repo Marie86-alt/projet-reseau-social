@@ -68,8 +68,8 @@
                 ?>
                 <article>
                     <img src="user.jpg" alt="blason"/>
-                    <h3><?php echo $user['alias']; ?></h3>
-                    <p>id:<?php echo $user['id']; ?></p>
+                    <h3><?php echo  ($user['alias']); ?></h3>
+                    <p>id:<?php echo ($user['id']); ?></p>
                 </article>
             </main>
             <?php
