@@ -118,13 +118,10 @@
                 ?>
 <?php
 
-            if ($_SESSION ['connected_id']=$user['id']) {
             ?>
 
             </main>
             <?php
-            }
-            echo ("Vous n'êtes pas connecté·e")
             ?>
         </div>
     </body>
