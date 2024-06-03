@@ -41,6 +41,7 @@
                 </section>
             </aside>
             <main class='contacts'>
+            <article>
                 <?php
                 // Etape 1: récupérer l'id de l'utilisateur
                 $userId = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
@@ -66,18 +67,20 @@
                 while ($follower = $lesInformations->fetch_assoc()) {
                     
                 ?>
-                <article>
+                
                     <img src="user.jpg" alt="blason"/>
                     <h3><?php echo  ($follower['alias']); ?></h3>
                     <p><?php echo ($follower['id']); ?></p>
-                </article>
-            </main>
+                
+            
             <?php
             // echo ("Vous n'êtes pas connecté·e")
                 }
                 
                
                 ?>
+             </article> 
+             </main>  
         </div>
     </body>
 </html>
