@@ -33,19 +33,12 @@ session_start()
         </header>
         <div id="wrapper">
             <?php
-            /**
-             * Etape 1: Le mur concerne un utilisateur en particulier
-             * La première étape est donc de trouver quel est l'id de l'utilisateur
-             * Celui ci est indiqué en parametre GET de la page sous la forme user_id=...
-             * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
-             * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
-             */
-            $userId =intval($_GET['user_id']);
+            // Etape 1: Le mur concerne un utilisateur en particulier
+            // La première étape est donc de trouver quel est l'id de l'utilisateur
+            $userId = intval($_GET['user_id']);
             ?>
             <?php
-            /**
-             * Etape 2: se connecter à la base de donnée
-             */
+            // Etape 2: se connecter à la base de données
             include('connect.php');
             ?>
             <aside>
@@ -57,7 +50,7 @@ session_start()
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 $user = $lesInformations->fetch_assoc();
                 ?>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <img src="user.jpg" alt="Portrait de l'utilisateur"/>
                 <section>
                     <h3>Présentation</h3>
                      
@@ -113,9 +106,7 @@ if (isset($_SESSION['connected_id'])) {
             </aside>
             <main>
                 <?php
-                /**
-                 * Etape 3: récupérer tous les messages de l'utilisatrice
-                 */
+                // Etape 4: récupérer tous les messages de l'utilisateur
                 $laQuestionEnSql = "
                     SELECT posts.content, posts.created, users.alias as author_name,
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist
