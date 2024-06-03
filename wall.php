@@ -1,29 +1,8 @@
 <?php
 // Démarrer la session
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe'])) {
-    // Se connecter à la base de données
-    include('connect.php');
-
-    // Récupérer l'id de l'utilisateur connecté
-    $connectedId = $_SESSION['connected_id'];
-    // Récupérer l'id de l'utilisateur à suivre
-    $followedUserId = intval($_POST['followed_user_id']);
-
-    // Ajouter une nouvelle ligne dans la table followers
-    $insertQuery = "INSERT INTO followers (following_user_id, followed_user_id) VALUES (?, ?)";
-    $stmt = $mysqli->prepare($insertQuery);
-    $stmt->bind_param('ii', $connectedId, $followedUserId);
-
-    if ($stmt->execute()) {
-        echo "Vous suivez maintenant cet utilisateur.";
-    } else {
-        echo "Erreur : " . $stmt->error;
-    }
-    $stmt->close();
-}
+session_start()
 ?>
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -74,21 +53,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe'])) {
                 <img src="user.jpg" alt="Portrait de l'utilisateur"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez tous les messages de l'utilisateur : <?php echo htmlspecialchars($user['alias']); ?>
-                        (n° <?php echo $userId; ?>)
+                     
+
+                    <p>Sur cette page vous trouverez tous les message de l'utilisatrice :  
+                    <?php
+                    echo $user['alias']
+                        ?>
+                        (n° <?php echo $userId ?>)
                     </p>
                 </section>
+                <section>
+                
                 <?php
-// Ajouter le formulaire d'abonnement si l'utilisateur n'est pas sur son propre mur
-if (isset($_SESSION['connected_id']) && $_SESSION['connected_id'] != $userId) {
+if (isset($_SESSION['connected_id'])) {
+    $connectedUser = $_SESSION['connected_id'];
 ?>
-    <form action="subscribe.php" method="post">
-        <input type="hidden" name="followed_user_id" value="<?php echo $userId; ?>">
-        <button type="submit">S'abonner</button>
+    <form action="message.php" method="post">
+        <label for="message"> Nouveau message :</label>
+        <textarea id="message" name="message" size="20" maxlength="30"></textarea>
+        <input type="hidden" name="user_id" value="<?php echo $connectedUser; ?>">
+        <input type="submit" value="Publier">
     </form>
 <?php
 }
 ?>
+
+                </section>
+                
+                  <section>
+<?php
+                  
+if (isset($_SESSION['connected_id'])) {
+    $connectedUser = $_SESSION['connected_id'];
+    if ($connectedUser != $userId)
+    {
+        ?>
+        <form action="subscriptions.php?user_id= <?php echo $connectedUser ?>" method="post">
+                <input type='submit' value="S'abonner">
+                <input type="hidden" id="followId" name="followId" value= <?php echo $userId ?>>
+            </form>   
+            <?php
+    }
+
+}
+?>     
+
+</section>
 
             </aside>
             <main>
