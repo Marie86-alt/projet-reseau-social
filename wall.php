@@ -89,15 +89,18 @@ if (isset($_SESSION['connected_id'])) {
                 
                   <section>
 <?php
-                  
+      
 if (isset($_SESSION['connected_id'])) {
     $connectedUser = $_SESSION['connected_id'];
     if ($connectedUser != $userId)
+ if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $sql = "INSERT INTO followers (followed_user_id, following_user_id) VALUES ('$userId', '$connectedUser')";}
     {
         ?>
         <form action="subscriptions.php?user_id= <?php echo $connectedUser ?>" method="post">
                 <input type='submit' value="S'abonner">
                 <input type="hidden" id="followId" name="followId" value= <?php echo $userId ?>>
+                
             </form>   
             <?php
     }

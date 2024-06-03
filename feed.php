@@ -123,8 +123,8 @@
 
             </main>
             <?php
-            echo ("Vous n'êtes pas connecté·e")
-            }
+            echo ("Vous n'êtes pas connecté·e");
+            };
             
             ?>
         </div>

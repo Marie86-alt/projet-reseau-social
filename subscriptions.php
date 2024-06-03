@@ -46,7 +46,7 @@
                 $userId = intval($_GET['user_id']);
                 // Etape 2: se connecter à la base de donnée
                 include('connect.php');
-        
+                include('connectbtn.php');
 
 
                 // Etape 3: récupérer le nom de l'utilisateur
