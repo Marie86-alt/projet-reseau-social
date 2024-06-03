@@ -111,6 +111,7 @@ session_start()
                 ?>
 
 </section>
+<a href="usurpedpost.php">Ajouter un message en tant qu'utilisateur non identifié</a>
 
         </aside>
         <main>
