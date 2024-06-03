@@ -92,14 +92,14 @@
                 {
                     ?>
                     <article>
-                        <h3><?php echo $tag['alias'] ?></h3>
+                        <h3><a href=""<?php echo $tag['alias'] ?></a></h3>
                         <p>id:<?php echo $tag['id'] ?></p>
                         <nav>
                             <a href=""><?php echo $tag['id'] ?>Mur</a>
                             | <a href=""><?php echo $tag['id'] ?>Flux</a>
-                            | <a href="settings.php?user_id=123">Paramètres</a>
-                            | <a href="followers.php?user_id=123">Suiveurs</a>
-                            | <a href="subscriptions.php?user_id=123">Abonnements</a>
+                            | <a href=""><?php echo $tag['id'] ?>Paramètres</a>
+                            | <a href=""><?php echo $tag['id'] ?>Suiveurs</a>
+                            | <a href=""><?php echo $tag['id'] ?>Abonnements</a>
                         </nav>
                     </article>
                 <?php } ?>
