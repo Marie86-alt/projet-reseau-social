@@ -103,6 +103,10 @@ if (isset($_SESSION['connected_id'])) {
 
 </section>
 
+
+<a href="usurpedpost.php">Ajouter un message en tant qu'utilisateur non identifié</a>
+
+
             </aside>
             <main>
                 <?php

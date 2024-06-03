@@ -83,15 +83,15 @@ session_start();
                         $postContent = $mysqli->real_escape_string($postContent);
                         //Etape 4 : construction de la requete
                         $lInstructionSql = "INSERT INTO posts "
-                                . "(id, user_id, content, created, permalink, post_id) "
-                                . "VALUES (NULL, "
-                                . $authorId . ", "
-                                . "'" . $postContent . "', "
-                                . "NOW(), "
-                                . "'', "
-                                . "NULL);"
-                                ;
-                        echo $lInstructionSql;
+                        . "(user_id, content, created) "
+                        . "VALUES ("
+                        . $authorId . ", "
+                        . "'" . $postContent . "', "
+                        . "NOW()"
+                        . ");"
+                        ;
+                
+                        //echo $lInstructionSql;
                         // Etape 5 : execution
                         $ok = $mysqli->query($lInstructionSql);
                         if ( ! $ok)
@@ -102,7 +102,8 @@ session_start();
                             echo "Message posté en tant que :" . $listAuteurs[$authorId];
                         }
                     }
-                    ?>                     
+                    ?>
+                                     
                     <form action="usurpedpost.php" method="post">
                         <input type='hidden' name='user-id' value='<?php echo $_SESSION['connected_id']; ?>'>
                         <dl>
