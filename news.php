@@ -82,7 +82,8 @@
                 $laQuestionEnSql = "
                     SELECT posts.content,
                     posts.created,
-                    users.alias as author_name,  
+                    users.alias as author_name,
+                    users.id as user_id,  
                     count(likes.id) as like_number,  
                     GROUP_CONCAT(DISTINCT tags.label) AS taglist 
                     FROM posts
@@ -119,7 +120,7 @@
                         </div>
                         <footer>
                             <small>♥ <?php echo $post['like_number'] ?> </small>
-                            <a href=""><?php echo $post['author_name'] ?></a>,
+                            <a href="wall.php?user_id=<?php echo $post['user_id'] ?>"><?php echo $post['author_name'] ?></a>
                         </footer>
                     </article>
                     <?php
