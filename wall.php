@@ -1,7 +1,10 @@
 <?php
 // Démarrer la session
-session_start()
-    ?>
+session_start();
+if (!(isset($_SESSION['connected_id']))) {
+    header("Location: login.php");
+}
+?>
 
 <!doctype html>
 <html lang="fr">
@@ -64,7 +67,7 @@ session_start()
                     (n° <?php echo $userId ?>)
                 </p>
             </section>
-            
+
             <section class="message">
 
                 <?php
@@ -85,8 +88,8 @@ session_start()
 
             <section class="follow">
                 <?php
-                    $follower_user_id = $userId;
-                    $following_user_id = $connectedUser;
+                $follower_user_id = $connectedUser;
+                $following_user_id = $userId;
                 if (isset($_SESSION['connected_id'])) {
                     $connectedUser = $_SESSION['connected_id'];
                     if ($connectedUser != $userId) {
@@ -105,13 +108,15 @@ session_start()
                             <input type='submit' name="subscribe" value="s'abonner">
                         </form>
                         <?php
+                        if(isset($_POST['suscribe'])){
+                            echo '<p><br /> vous êtes abonné à' . $userId . '!</p>';
+                        }
                     }
 
                 }
                 ?>
 
-</section>
-<a href="usurpedpost.php">Ajouter un message en tant qu'utilisateur non identifié</a>
+            </section>
 
         </aside>
         <main>

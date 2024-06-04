@@ -1,3 +1,11 @@
+<?php
+// Démarrer la session
+session_start();
+if(!(isset($_SESSION['connected_id']))) {
+    header("Location: login.php");
+}
+    ?>
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -124,11 +132,6 @@
             ?>
 
             </main>
-            <?php
-            echo ("Vous n'êtes pas connecté·e");
-            };
-            
-            ?>
         </div>
     </body>
 </html>
