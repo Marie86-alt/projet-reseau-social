@@ -1,14 +1,10 @@
 <?php
 // Démarrer la session
 session_start();
-<<<<<<< HEAD
-    ?>
-=======
 if (!(isset($_SESSION['connected_id']))) {
     header("Location: login.php");
 }
 ?>
->>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
 
 <!doctype html>
 <html lang="fr">
@@ -71,7 +67,6 @@ if (!(isset($_SESSION['connected_id']))) {
                     (n° <?php echo $userId ?>)
                 </p>
             </section>
-<<<<<<< HEAD
             <section>
             <?php
 
@@ -115,9 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
             </section>
             
             
-=======
-
->>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
             <section class="message">
 
                 <?php
@@ -138,14 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
 
             <section class="follow">
                 <?php
-<<<<<<< HEAD
-                    $follower_user_id = $userId;
-                    $following_user_id = $connectedUser;
-                    // une session sert a authentifier un utilisateur
-=======
                 $follower_user_id = $connectedUser;
                 $following_user_id = $userId;
->>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
                 if (isset($_SESSION['connected_id'])) {
                     $connectedUser = $_SESSION['connected_id'];
                     if ($connectedUser != $userId) {
@@ -209,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
                         <form action="" method="post">
                              <input type='hidden' name='post_id' value='<?php echo $post['post_id'] ?>'>
                              <input type="submit" value="like">
-                                ♥ <?php echo $post['like_number'] ?>
+                             ❤️<?php echo $post['like_number'] ?>
                              </form>
                             </small>
                             <?php 
