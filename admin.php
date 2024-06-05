@@ -1,3 +1,11 @@
+<?php
+// Démarrer la session
+session_start();
+if(!(isset($_SESSION['connected_id']))) {
+    header("Location: login.php");
+}
+    ?>
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -92,7 +100,10 @@
                 {
                     ?>
                     <article>
-                        <h3><?php echo $tag['alias'] ?></h3>
+
+                    <h3> 
+                    <a href= "wall.php?user_id=<?php echo $tag['id']; ?>"><?php echo $tag['alias']; ?></a>
+                    <h3>
                         <p>id:<?php echo $tag['id'] ?></p>
                         <nav>
                             <a href="wall.php?user_id=<?php echo $tag['id']; ?>">Mur</a>

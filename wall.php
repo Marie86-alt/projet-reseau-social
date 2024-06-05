@@ -1,7 +1,14 @@
 <?php
 // Démarrer la session
 session_start();
+<<<<<<< HEAD
     ?>
+=======
+if (!(isset($_SESSION['connected_id']))) {
+    header("Location: login.php");
+}
+?>
+>>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
 
 <!doctype html>
 <html lang="fr">
@@ -64,6 +71,7 @@ session_start();
                     (n° <?php echo $userId ?>)
                 </p>
             </section>
+<<<<<<< HEAD
             <section>
             <?php
 
@@ -107,6 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
             </section>
             
             
+=======
+
+>>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
             <section class="message">
 
                 <?php
@@ -127,9 +138,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
 
             <section class="follow">
                 <?php
+<<<<<<< HEAD
                     $follower_user_id = $userId;
                     $following_user_id = $connectedUser;
                     // une session sert a authentifier un utilisateur
+=======
+                $follower_user_id = $connectedUser;
+                $following_user_id = $userId;
+>>>>>>> 910f2c3cc3f1ed7ab88f040f1c474edd128cdc25
                 if (isset($_SESSION['connected_id'])) {
                     $connectedUser = $_SESSION['connected_id'];
                     if ($connectedUser != $userId) {
@@ -148,13 +164,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
                             <input type='submit' name="subscribe" value="s'abonner">
                         </form>
                         <?php
+                        if(isset($_POST['suscribe'])){
+                            echo '<p><br /> vous êtes abonné à' . $userId . '!</p>';
+                        }
                     }
 
                 }
                 ?>
 
-</section>
-<a href="usurpedpost.php">Ajouter un message en tant qu'utilisateur non identifié</a>
+            </section>
 
         </aside>
         <main>
