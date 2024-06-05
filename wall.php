@@ -1,6 +1,6 @@
 <?php
 // Démarrer la session
-session_start()
+session_start();
     ?>
 
 <!doctype html>
@@ -64,6 +64,48 @@ session_start()
                     (n° <?php echo $userId ?>)
                 </p>
             </section>
+            <section>
+            <?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id']))
+                    {
+                        // on ne fait ce qui suit que si un formulaire a été soumis.
+                        $postLike = intval($_POST['post_id']);
+ // Afficher la valeur de post_id pour le débogage
+ //echo "post_id reçu: " . htmlspecialchars($postLike) . "<br>";
+
+                        // Petite sécuritén - pour éviter les injection sql :
+                        $postLike = $mysqli->real_escape_string($postLike);
+
+                        // Construction de la requete
+                        //$lInstructionSql = "INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES (NULL, ?, ?)";
+                              // Vérifier si le post_id existe dans la table posts_tags
+                    $verifPostSql = "SELECT id FROM posts WHERE id = ?";
+                    $stmt = $mysqli->prepare($verifPostSql);
+                    $stmt->bind_param("i", $postLike);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        // Construction de la requête
+                        $lInstructionSql = "INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES (NULL, ?, ?)";
+                        $stmt = $mysqli->prepare($lInstructionSql);
+                        $stmt->bind_param("ii", $_SESSION["connected_id"], $postLike);
+                        $ok = $stmt->execute();
+                        if (!$ok) {
+                            echo "Impossible d'ajouter un like: " . $mysqli->error;
+                        } else {
+                            echo "like posté";
+                        }
+                    } else {
+                        echo "Le post que vous essayez de liker n'existe pas.";
+                    }
+                    header("Location: " . $_SERVER['REQUEST_URI']);
+                    exit;
+                }
+                    
+                ?>
+            </section>
+            
             
             <section class="message">
 
@@ -87,6 +129,7 @@ session_start()
                 <?php
                     $follower_user_id = $userId;
                     $following_user_id = $connectedUser;
+                    // une session sert a authentifier un utilisateur
                 if (isset($_SESSION['connected_id'])) {
                     $connectedUser = $_SESSION['connected_id'];
                     if ($connectedUser != $userId) {
@@ -118,7 +161,7 @@ session_start()
             <?php
             // Etape 4: récupérer tous les messages de l'utilisateur
             $laQuestionEnSql = "
-                    SELECT posts.content, posts.created, users.alias as author_name,
+                    SELECT posts.id as post_id, posts.content, posts.created, users.alias as author_name,
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
@@ -144,8 +187,25 @@ session_start()
                         <p><?php echo $post['content'] ?></p>
                     </div>
                     <footer>
-                        <small> ♥ <?php echo $post['like_number'] ?></small>
+                    <small>
+                        <form action="" method="post">
+                             <input type='hidden' name='post_id' value='<?php echo $post['post_id'] ?>'>
+                             <input type="submit" value="like">
+                                ♥ <?php echo $post['like_number'] ?>
+                             </form>
+                            </small>
+                            <?php 
+                            if (!empty($post['taglist'])) {
+                                $tags = explode(",", $post['taglist']);
+                                foreach ($tags as $tag) {
+                                    echo "<a href='tags.php?tag_id=" . htmlspecialchars($tag) . "'>" . htmlspecialchars($tag) . "</a> &nbsp;";
+                                }
+                            }
+                            ?>
+                        
+                        
                         <a href="">#<?php echo $post['taglist'] ?></a>
+         
                     </footer>
                 </article>
             <?php } ?>
